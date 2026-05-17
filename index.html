@@ -59,9 +59,12 @@
   .nav-links a{color:var(--sub);transition:color .3s;position:relative;padding:8px 0}
   .nav-links a:hover,.nav-links a.active{color:var(--gold-deep)}
   .nav-links a.active::after{content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:24px;height:1px;background:var(--gold)}
-  .nav-user{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--sub);letter-spacing:0.1em}
-  .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold-soft),var(--gold));display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Cormorant Garamond",serif;font-size:14px}
-  .nav-user .chev{color:var(--mute);font-size:10px}
+  .nav-spacer{width:1px;height:1px}
+  .nav-toggle{display:none;background:transparent;border:none;cursor:pointer;width:36px;height:36px;padding:0;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+  .nav-toggle span{display:block;width:22px;height:1px;background:var(--gold-deep);transition:transform .3s,opacity .3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
   /* ============ HERO ============ */
   .hero{
@@ -463,13 +466,31 @@
 
   /* ============ RESPONSIVE ============ */
   @media(max-width:960px){
-    nav.top{padding:14px 20px}
-    .nav-links{display:none}
+    nav.top{padding:14px 18px;flex-wrap:wrap}
+    .brand .logo{font-size:15px;letter-spacing:0.08em}
+    .nav-toggle{display:flex}
+    .nav-links{
+      display:none;
+      position:fixed;top:60px;left:0;right:0;
+      flex-direction:column;gap:0;
+      background:var(--bg);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      padding:8px 0;z-index:90;
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:18px 24px;border-bottom:1px solid var(--line);text-align:center;letter-spacing:0.25em}
+    .nav-links a:last-child{border-bottom:none}
+    .nav-links a.active::after{display:none}
     .container{padding:48px 20px}
-    .hero{height:380px}
-    .hero h1{font-size:28px}
+    .hero{height:360px}
+    .hero h1{font-size:24px;line-height:1.7}
+    .hero-en{font-size:11px;letter-spacing:0.4em;margin-bottom:18px}
+    .hero .quote{font-size:11.5px}
     .page-hero{height:200px}
-    .page-hero h1{font-size:24px}
+    .page-hero h1{font-size:22px}
+    .section-title{font-size:20px}
+    .section-sub{margin-left:30px;font-size:11.5px}
     .dash-grid,.habit-list,.lesson-list,.progress-grid{grid-template-columns:1fr}
     .cat-grid{grid-template-columns:repeat(2,1fr)}
     .cat{border-right:1px solid var(--line) !important;border-bottom:1px solid var(--line) !important}
@@ -480,6 +501,49 @@
     .stat-strip{grid-template-columns:repeat(2,1fr)}
     .timeline{grid-template-columns:1fr 1fr}
     .journal-deco,.journal-deco-l{display:none}
+    .habit-illust{width:90px;height:90px;opacity:0.4;bottom:80px}
+    .habit-desc{max-width:100%}
+    .card{padding:24px 22px}
+    .card-num{font-size:38px}
+    .ring{width:88px;height:88px}
+    .ring-text .num{font-size:24px}
+  }
+  @media(max-width:600px){
+    nav.top{padding:12px 16px}
+    .brand .logo{font-size:13.5px;letter-spacing:0.05em}
+    .nav-links{top:54px}
+    .container{padding:36px 16px}
+    .hero{height:300px}
+    .hero h1{font-size:19px;letter-spacing:0.08em;line-height:1.7}
+    .hero-en{font-size:10px;letter-spacing:0.35em;margin-bottom:14px}
+    .ornament{margin:20px 0 14px}
+    .hero .quote{font-size:10.5px}
+    .page-hero{height:160px}
+    .page-hero h1{font-size:18px;letter-spacing:0.08em}
+    .section-head{gap:10px;margin-bottom:4px}
+    .section-title{font-size:17px;letter-spacing:0.05em}
+    .section-sub{margin-left:0;font-size:11px;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+    .divider-line{margin-left:0;margin-bottom:24px}
+    .cat-grid{grid-template-columns:1fr}
+    .lesson{padding:28px 18px}
+    .week-block{padding:22px 16px}
+    .journal{padding:24px 16px}
+    .weeks-overview{grid-template-columns:repeat(2,1fr);gap:10px}
+    .stat-strip{grid-template-columns:1fr}
+    .timeline{grid-template-columns:1fr}
+    .card{padding:22px 18px}
+    .card-num{font-size:34px}
+    .card-row{flex-direction:column;align-items:flex-start;gap:14px}
+    .ring{width:80px;height:80px}
+    .ring-text .num{font-size:22px}
+    .habit{min-height:auto;padding:24px 20px}
+    .habit-illust{display:none}
+    .habit-title{font-size:15.5px}
+    .habit-desc{font-size:12px;max-width:100%}
+    .toast{left:16px;right:16px;transform:translateY(120%);padding:12px 20px;font-size:11px;letter-spacing:0.15em;text-align:center}
+    .toast.show{transform:translateY(0)}
+    input,textarea,select,button{font-size:16px} /* prevent iOS zoom */
+    .entry-modal>div{max-width:92vw !important;padding:24px 18px !important}
   }
 </style>
 </head>
@@ -495,11 +559,9 @@
     <a onclick="go('curriculum')" data-page="curriculum">カリキュラム</a>
     <a onclick="go('journal')" data-page="journal">ジャーナル</a>
   </div>
-  <div class="nav-user">
-    Ayaka 様
-    <div class="avatar">A</div>
-    <div class="chev">▾</div>
-  </div>
+  <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ============ HOME ============ -->
@@ -1152,7 +1214,16 @@
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById('page-'+name).classList.add('active');
     document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.page===name));
+    closeNav();
     window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function toggleNav(){
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.getElementById('nav-toggle').classList.toggle('open');
+  }
+  function closeNav(){
+    document.querySelector('.nav-links').classList.remove('open');
+    document.getElementById('nav-toggle').classList.remove('open');
   }
   document.querySelectorAll('.habit').forEach(h=>{
     h.addEventListener('click',e=>{e.stopPropagation();h.classList.toggle('done');});
